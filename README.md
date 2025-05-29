@@ -1,112 +1,114 @@
+# Real-time Object Detection System
 
-# 🦖 DINO-based Object Detection using Hugging Face Dataset
+This project implements a real-time object detection system using the DETR (DEtection TRansformer) model. It provides real-time object detection through your webcam with bounding boxes and confidence scores.
 
-This project demonstrates how to perform **object detection** using the **DINO (DETR with Improved DeNoising Training)** model, fine-tuned on a dataset imported from the **Hugging Face Datasets Hub**.
+## Features
 
-## 🚀 Overview
+- Real-time object detection using webcam
+- High-accuracy detection using DETR model
+- Bounding box visualization with confidence scores
+- Support for common objects (people, cars, animals, etc.)
+- Easy-to-use interface
 
-- ✅ Model: [DINO (Facebook Research)](https://github.com/IDEA-Research/DINO)
-- 📦 Dataset: Imported from Hugging Face (`coco2017` or any custom dataset)
-- 🧠 Framework: PyTorch + Hugging Face + Transformers
-- 🎯 Task: Object detection with bounding boxes and class labels
-- 📊 Metrics: mAP (mean Average Precision), IoU
-- 🖼️ Visualization: Matplotlib or OpenCV
+## Requirements
 
----
+- Python 3.8 or higher
+- Webcam
+- CUDA-capable GPU (optional, but recommended for better performance)
 
-## 📁 Project Structure
+## Installation
 
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/object-detection.git
+cd object-detection
 ```
 
-📦 dino-object-detection
-├── 📂 data/                # Dataset (auto-downloaded from Hugging Face)
-├── 📂 src/                 # Core training, evaluation, and utils
-├── 📂 results/             # Sample predictions with bounding boxes
-├── train.py               # Fine-tuning script
-├── evaluate.py            # Evaluation & mAP calculation
-├── visualize.py           # Visualization utility
-├── requirements.txt       # Python dependencies
-└── README.md              # You're here!
-
-````
-
----
-
-## 📚 Dataset
-
-We use the `keremberke/coco2017` dataset from Hugging Face (or you can replace with a custom dataset).
-
-```python
-from datasets import load_dataset
-dataset = load_dataset("keremberke/coco2017")
-````
-
----
-
-## 🏗️ Installation
-
-Clone the repository and install the required packages.
-
+2. Create a virtual environment (recommended):
 ```bash
-git clone https://github.com/BadavathArjun/DINO.git
-cd DINO
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
 pip install -r requirements.txt
 ```
 
----
-
-## ⚙️ Usage
-
-### 🔹 Training the Model
-
+Or install the package in development mode:
 ```bash
-python train.py --dataset coco2017 --epochs 10 --lr 1e-4
+pip install -e .
 ```
 
-### 🔹 Evaluation
+## Usage
 
+1. Run the detection script:
 ```bash
-python evaluate.py --model_path ./checkpoints/dino_best.pth
+python run_detection.py
 ```
 
-### 🔹 Visualization
+2. The webcam will open and start detecting objects in real-time
+3. Press 'q' to quit the detection
 
-```bash
-python visualize.py --model_path ./checkpoints/dino_best.pth --num_images 5
+## Project Structure
+
+```
+object-detection/
+├── run_detection.py      # Main detection script
+├── train_dino.py         # Training script (if needed)
+├── visualize.py          # Visualization utilities
+├── requirements.txt      # Project dependencies
+├── setup.py             # Package setup file
+└── README.md            # This file
 ```
 
----
+## Model Details
 
-## 📊 Results
+The project uses the DETR (DEtection TRansformer) model from Facebook Research, which is a state-of-the-art object detection model. The model is pre-trained on the COCO dataset and can detect 80 different object classes.
 
-* ✅ Achieved mAP of **XX.XX** on the validation set
-* 🔍 Visual inspection confirms good bounding box localization and classification
+## Performance
 
----
+The model provides:
+- Real-time detection (depending on your hardware)
+- High accuracy object detection
+- Confidence scores for each detection
+- Bounding box visualization
 
-## 💡 Future Work
+## Customization
 
-* Add real-time webcam detection
-* Extend to custom object detection datasets
-* Build a Streamlit web app for demo
+You can customize the detection by:
+1. Adjusting the confidence threshold in `run_detection.py`
+2. Modifying the visualization colors and styles
+3. Adding custom object classes (requires model fine-tuning)
 
----
+## Troubleshooting
 
-## 📚 References
+Common issues and solutions:
 
-* [DINO GitHub (IDEA Research)](https://github.com/IDEA-Research/DINO)
-* [Hugging Face Datasets](https://huggingface.co/datasets)
-* [DETR: End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872)
+1. Webcam not opening:
+   - Check if your webcam is properly connected
+   - Try changing the camera index in `run_detection.py`
 
----
+2. Slow performance:
+   - Use a GPU if available
+   - Reduce the input image size
+   - Adjust the confidence threshold
 
-## 🤝 Contributing
+3. Model loading errors:
+   - Check your internet connection
+   - Verify the model path
+   - Ensure all dependencies are installed
 
-Pull requests are welcome! If you find bugs or have suggestions, feel free to open an issue.
+## Contributing
 
----
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📜 License
+## License
 
-This project is licensed under the MIT License. See `LICENSE` for details.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
+## Acknowledgments
+
+- Facebook Research for the DETR model
+- Hugging Face for the Transformers library
+- OpenCV for computer vision utilities 
